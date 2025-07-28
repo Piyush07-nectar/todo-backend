@@ -11,6 +11,4 @@ app.get("/", (req, res) => {
     app.use(express.static(path.resolve(__dirname, "frontend", "build")));
   res.sendFile(path.resolve(__dirname, "Frontend", "build", "index.html"));
 });
-app.listen(1000,()=>{
-    console.log("Server Started")
-})
+module.exports = app; 

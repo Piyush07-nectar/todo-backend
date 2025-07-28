@@ -5,8 +5,8 @@ const User = require("../models/user");
 // Create
 route.post("/addList", async (req, res) => {
   try {
-    const { title, body, email } = req.body;
-    const existuser = await User.findOne({ email });
+    const { title, body, id } = req.body;
+    const existuser = await User.findById(id);
     if (existuser) {
       const list = new List({
         title,

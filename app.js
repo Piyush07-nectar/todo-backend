@@ -1,22 +1,21 @@
 const express = require('express');
-const path = require("path");
 const app = express();
-
 const auth = require('./route/auth');
 const list = require('./route/list');
+const cors = require('cors');
 
 app.use(express.json());
+app.use(cors());
 require("./conn/connection");
+
+app.get("/", (req, res) => {
+    res.send("Hello World");
+});
 
 app.use("/api", auth);
 app.use("/api", list);
 
-// Serve static files
-app.use(express.static(path.resolve(__dirname, "Frontend", "build")));
-
-// Catch-all for React routes
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "Frontend", "build", "index.html"));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
-
-module.exports = app;
